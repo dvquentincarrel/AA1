@@ -2,6 +2,7 @@ package aa1;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -75,9 +76,30 @@ public class Application implements Serializable {
     }
 
     private void ajouterInstrumentEnfant() {
-        //Instrument instrument, Enfant enfant
         // TODO: à implémenter
-        //Lie un gosse et un instrument par une séance
+        
+        HashSet<String> enfantlibre = new HashSet<String>();
+        for (Enfant enf : getEnfants().values()) {
+            if (enf.getSeance().size() <  3) {
+                enfantlibre.add(enf.getNom());
+            }
+        }
+        Enfant tom = getEnfant(CLI.choisirEnfant(enfantlibre));
+        
+        HashSet<String> inst = new HashSet<String>(instruments.keySet()) ; 
+        for (Seance seance : tom.getSeance()) {
+            inst.remove(seance.getInstrument());
+        }
+        Instrument instChoisie = getInstrument(CLI.choisirInstrument(inst));
+        
+        Jour jourChoisie;
+        HashSet<Jour> joursOccupes = new HashSet<Jour>();
+        for (Seance seance : tom.getSeance()) {
+            joursOccupes.add(seance.getJour());
+        }
+        jourChoisie = CLI.lireJour(joursOccupes);
+        
+        tom.setSeance(new Seance(jourChoisie,tom,instChoisie));
     }
 
     private void afficherInscriptionsEnfants() {
