@@ -1,4 +1,4 @@
-package fr.uga.iut2.decouverte_instruments;
+package aa1;
 
 import java.io.IOException;
 

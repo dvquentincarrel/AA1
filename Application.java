@@ -74,7 +74,8 @@ public class Application implements Serializable {
         );
     }
 
-    private void ajouterInstrumentEnfant(Instrument instrument, Enfant enfant) {
+    private void ajouterInstrumentEnfant() {
+        //Instrument instrument, Enfant enfant
         // TODO: à implémenter
         //Lie un gosse et un instrument par une séance
     }
