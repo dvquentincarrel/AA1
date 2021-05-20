@@ -323,11 +323,9 @@ public class CLI {
         for (Instrument ins : instruments) {
             System.out.println("· " + ins);
 
-            // TODO: à compléter
             for (Seance seance : ins.getSeance()) {
-                System.out.println("bite gros caca");
                 System.out.println("- [" + seance.getJour() + "] " + seance.getEnfant().getNom());
-                
+
             }
 
             System.out.println();
@@ -350,8 +348,8 @@ public class CLI {
             for (Seance seance : enf.getSeance()) {
                 System.out.println("- [" + seance.getJour() + "] " + seance.getInstrument());
             }
-                    
-            
+
+
             System.out.println();
         }
         System.out.flush();
