@@ -76,30 +76,35 @@ public class Application implements Serializable {
     }
 
     private void ajouterInstrumentEnfant() {
-        // TODO: à implémenter
-        
-        HashSet<String> enfantlibre = new HashSet<String>();
-        for (Enfant enf : getEnfants().values()) {
-            if (enf.getSeance().size() <  3) {
-                enfantlibre.add(enf.getNom());
+
+        // Récupération des enfants éligibles pour une inscription
+        HashSet<String> enfantsLibres = new HashSet<String>();
+        for (Enfant enfantValues : getEnfants().values()) {
+            if (enfantValues.getSeance().size() <  3) {
+                enfantsLibres.add(enfantValues.getNom());
             }
         }
-        Enfant tom = getEnfant(CLI.choisirEnfant(enfantlibre));
-        
-        HashSet<String> inst = new HashSet<String>(instruments.keySet()) ; 
-        for (Seance seance : tom.getSeance()) {
-            inst.remove(seance.getInstrument());
+        Enfant enfantChoisi = getEnfant(CLI.choisirEnfant(enfantsLibres));
+
+        // Empêche d'inscrire un enfant plusieurs fois au même instrument
+        HashSet<String> setNomsInstruments = new HashSet<String>(instruments.keySet()) ;
+        for (Seance seance : enfantChoisi.getSeance()) {
+            setNomsInstruments.remove(seance.getInstrument().getNom());
         }
-        Instrument instChoisie = getInstrument(CLI.choisirInstrument(inst));
-        
-        Jour jourChoisie;
+        Instrument instrumentChoisi = getInstrument(CLI.choisirInstrument(setNomsInstruments));
+
+        // Empêche d'inscrire un enfant plusieurs fois le même jour
+        Jour jourChoisi;
         HashSet<Jour> joursOccupes = new HashSet<Jour>();
-        for (Seance seance : tom.getSeance()) {
+        for (Seance seance : enfantChoisi.getSeance()) {
             joursOccupes.add(seance.getJour());
         }
-        jourChoisie = CLI.lireJour(joursOccupes);
-        
-        tom.setSeance(new Seance(jourChoisie,tom,instChoisie));
+        jourChoisi = CLI.lireJour(joursOccupes);
+
+        // Liage (c'est un vrai mot, j'ai vérifié) d'une séance à son enfant et son instrument
+        Seance nouvelleSeance = new Seance(jourChoisi,enfantChoisi,instrumentChoisi);
+        enfantChoisi.setSeance(nouvelleSeance);
+        instrumentChoisi.setSeance(nouvelleSeance);
     }
 
     private void afficherInscriptionsEnfants() {
