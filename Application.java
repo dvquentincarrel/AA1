@@ -84,6 +84,10 @@ public class Application implements Serializable {
                 enfantsLibres.add(enfantValues.getNom());
             }
         }
+        if (enfantsLibres.size() == 0){
+            CLI.informerUtilisateur("Aucune inscription possible dans ces conditions.",false);
+            return;
+        }
         Enfant enfantChoisi = getEnfant(CLI.choisirEnfant(enfantsLibres));
 
         // Empêche d'inscrire un enfant plusieurs fois au même instrument
@@ -105,6 +109,7 @@ public class Application implements Serializable {
         Seance nouvelleSeance = new Seance(jourChoisi,enfantChoisi,instrumentChoisi);
         enfantChoisi.setSeance(nouvelleSeance);
         instrumentChoisi.setSeance(nouvelleSeance);
+        CLI.informerUtilisateur("L'enfant a été inscrit à la séance renseignée.",true);
     }
 
     private void afficherInscriptionsEnfants() {
