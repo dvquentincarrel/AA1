@@ -29,18 +29,7 @@ public class Enfant implements Serializable {
     }
 
     public void setSeance(Seance seance) {
-    //Maximum une séance par jour et 3 séances au total
-        if (seances.size() == 3){
-            System.out.println("Cet enfant est déjà inscrit à 3 séances"); //A REVOIR
-            return;
-        }
-        else if (!seances.values().contains(seance.getJour())) {
-            seances.put(seance,seance.getJour());
-        }
-        else {
-            System.out.println("Cet enfant est déjà inscrit un " + seance.getJour());
-        }
-
+        seances.put(seance,seance.getJour());      
     }
 
     @Override
