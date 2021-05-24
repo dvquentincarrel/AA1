@@ -80,7 +80,11 @@ public class Application implements Serializable {
         // Récupération des enfants éligibles pour une inscription
         HashSet<String> enfantsLibres = new HashSet<String>();
         for (Enfant enfantValues : getEnfants().values()) {
-            if ((enfantValues.getSeance().size() <  3) && (enfantValues.getSeance().size() < getInstruments().values().size())) {
+            // Test de l'inscription à maximum :
+            // - 3 séances
+            // - tous les instruments (utile uniquement s'il y en a moins que 3)
+            if ((enfantValues.getSeance().size() <  3) &&
+                (enfantValues.getSeance().size() < getInstruments().values().size())) {
                 enfantsLibres.add(enfantValues.getNom());
             }
         }
