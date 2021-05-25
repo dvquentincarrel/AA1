@@ -21,11 +21,12 @@ public class Instrument implements Serializable {
         return nom;
     }
 
-    public HashSet<Seance> getSeance() { //A REVOIR
+    public HashSet<Seance> getSeance() {
         return seances;
     }
 
     public void setSeance(Seance seance) {
+        // Oui bon, plutôt addSeance que setSeance, mais on se comprend.
         seances.add(seance);
     }
 
