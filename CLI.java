@@ -344,7 +344,6 @@ public class CLI {
         for (Enfant enf : enfants) {
             System.out.println("· " + enf);
 
-            // TODO: à compléter
             for (Seance seance : enf.getSeance()) {
                 System.out.println("- [" + seance.getJour() + "] " + seance.getInstrument());
             }
