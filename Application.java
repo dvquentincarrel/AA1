@@ -1,3 +1,4 @@
+// D1 CARREL Quentin & ARNOUX Emmanuel
 package aa1;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.Map;
  *
  * @author Raphaël Bleuse <raphael.bleuse@univ-grenoble-alpes.fr>
  */
+
 public class Application implements Serializable {
 
     private static final long serialVersionUID = 1L;  // nécessaire pour la sérialisation
